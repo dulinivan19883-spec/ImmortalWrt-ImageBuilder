@@ -6,74 +6,62 @@
 # 各位注意 如果你构建的固件是硬路由 此文件的注释要酌情考虑是否打开 因为硬路由的闪存空间有限 若构建出来过大或者构建失败 记得调整本文件的注释
 # 考虑到istore商店的集成与否 属于高频操作 故 目前已将集成store的操作放置在 工作流的UI 选项 用户自行勾选 则集成  不勾选则不集成 以减少修改此文件的次数
 
-# 新增Run安装器 用于快速安装makeself打包的run文件 目前和quickfile的nginx配置冲突 请勿同时集成quickfile
-#CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-run"
-# 首页和网络向导
-#CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-quickstart-zh-cn"
-# 新增非常好用的文件管理器 sbwml/luci-app-quickfile （luci 23版本不支持 勿集成）
-#CUSTOM_PACKAGES="$CUSTOM_PACKAGES bash quickfile luci-app-quickfile luci-i18n-quickfile-zh-cn"
-# 高级卸载 by YT Vedio Talk
-#CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-uninstall"
-# 极光主题 by github eamonxg
-#CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-theme-aurora luci-app-aurora-config luci-i18n-aurora-config-zh-cn"
-
 # =====================================================================
 # ================= ВАШИ ВЫБРАННЫЕ ПАКЕТЫ (АКТИВНЫ) ===================
 # =====================================================================
 
-# --- Базовые утилиты и русификация ---
+# --- Базовые утилиты и русификация интерфейса ---
 CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-base-ru luci-i18n-firewall-ru luci-i18n-opkg-ru"
+# Управление дисками, Веб-терминал, WireGuard
 CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-diskman luci-i18n-diskman-ru luci-app-ttyd luci-i18n-ttyd-ru luci-proto-wireguard luci-i18n-wireguard-ru"
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES sqm luci-app-sqm luci-i18n-sqm-ru"
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES ipsec luci-app-ipsec luci-i18n-sqm-ru"
 
-# --- Блокировка рекламы ---
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-adguardhome"
+# --- Управление трафиком и сетью ---
+# SQM (Стабильный пинг), Watchcat (Сторожевой таймер), Автоперезагрузка, Мониторинг трафика
+CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-sqm luci-i18n-sqm-ru luci-app-watchcat luci-i18n-watchcat-ru luci-app-autoreboot luci-i18n-autoreboot-ru luci-app-statistics luci-i18n-statistics-ru"
 
-# --- Прокси-клиенты и VPN (Ранее выбранные) ---
+# --- Блокировка рекламы и DNS ---
+# AdGuard Home, MosDNS, Unbound, SmartDNS, Adblock-Fast
+CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-adguardhome luci-app-mosdns luci-i18n-mosdns-zh-cn luci-app-unbound luci-i18n-unbound-ru luci-app-smartdns luci-i18n-smartdns-ru luci-app-adblock-fast luci-i18n-adblock-fast-ru"
+
+# --- ПРОКСИ-КЛИЕНТЫ (Выбирайте потом один) ---
+# 1. OpenClash (Классика)
 CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-openclash luci-compat kmod-tun kmod-inet-diag kmod-nft-tproxy bash curl ip-full unzip luci-i18n-openclash-ru"
-
-# --- Прокси-клиенты и VPN (Новый список по вашему запросу) ---
-# V2RayA
+# 2. V2RayA (Панель для Xray)
 CUSTOM_PACKAGES="$CUSTOM_PACKAGES v2raya luci-app-v2raya luci-i18n-v2raya-ru"
-# ZeroTier
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES zerotier luci-app-zerotier luci-i18n-zerotier-ru"
-# Unbound
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES unbound luci-app-unbound luci-i18n-unbound-ru"
-# UA2F
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES ua2f luci-app-ua2f luci-i18n-ua2f-ru"
-# SSHTunnel
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES sshtunnel luci-app-sshtunnel luci-i18n-sshtunnel-ru"
-# SoftEther VPN
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES softethervpn5-server softethervpn5-libs luci-app-softethervpn luci-i18n-softethervpn-ru"
-# MicroSocks
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES microsocks luci-app-microsocks luci-i18n-microsocks-ru"
-# IPsec VPN
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES strongswan-full luci-app-ipsec-vpnd luci-i18n-ipsec-vpnd-ru"
-# GoST
+# 3. PassWall2 (Мощный комбайн)
+CUSTOM_PACKAGES="$CUSTOM_PACKAGES geoview xray-core sing-box hysteria kmod-nft-socket kmod-nft-tproxy luci-app-passwall2 luci-i18n-passwall2-zh-cn"
+# 4. Nikki (Современный клиент на базе sing-box)
+CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-nikki-zh-cn"
+# 5. GoST (Универсальный прокси)
 CUSTOM_PACKAGES="$CUSTOM_PACKAGES gost luci-app-gost luci-i18n-gost-ru"
-# Cloudflared
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES cloudflared luci-app-cloudflared luci-i18n-cloudflared-ru"
-# ACME (Сертификаты)
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES acme luci-app-acme luci-i18n-acme-ru"
+# 6. MicroSocks (Легкий SOCKS5)
+CUSTOM_PACKAGES="$CUSTOM_PACKAGES microsocks luci-app-microsocks luci-i18n-microsocks-ru"
+
+# --- VPN И ТУННЕЛИ ---
+# ZeroTier, Tailscale, SoftEther, IPsec, Cloudflared (Cloudflare Tunnel), SSHTunnel
+CUSTOM_PACKAGES="$CUSTOM_PACKAGES zerotier luci-app-zerotier luci-i18n-zerotier-ru luci-app-tailscale-community luci-i18n-tailscale-community-zh-cn softethervpn5-server softethervpn5-libs luci-app-softethervpn luci-i18n-softethervpn-ru strongswan-full luci-app-ipsec-vpnd luci-i18n-ipsec-vpnd-ru cloudflared luci-app-cloudflared luci-i18n-cloudflared-ru sshtunnel luci-app-sshtunnel luci-i18n-sshtunnel-ru"
+
+# --- Сетевые сервисы и загрузки ---
+# qBittorrent, Aria2 (Торренты/Загрузки), Samba4 (Сетевые папки), ACME (SSL сертификаты), UA2F
+CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-qbittorrent luci-i18n-qbittorrent-ru luci-app-aria2 luci-i18n-aria2-ru luci-app-samba4 luci-i18n-samba4-ru acme luci-app-acme luci-i18n-acme-ru ua2f luci-app-ua2f luci-i18n-ua2f-ru"
+
+# --- Файловые менеджеры и Docker (для тестов) ---
+# FileBrowser и Docker (пригодится для запуска чего угодно)
+CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-filebrowser-go luci-i18n-filebrowser-go-zh-cn luci-app-dockerman luci-i18n-dockerman-ru"
 
 # =====================================================================
 # ======================= ОСТАЛЬНОЙ СПИСОК ============================
 # =====================================================================
+# (Тут оставлен оригинальный список для справки, ничего не трогаем)
 
 # VPN
-#CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-proto-wireguard"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-tailscale-community luci-i18n-tailscale-community-zh-cn"
 # 分区扩容 by sirpdboy 
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-partexp luci-i18n-partexp-zh-cn"
-# 看门狗watchdog by sirpdboy
-#CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-watchdog luci-i18n-watchdog-zh-cn"
 # 酷猫主题 by sirpdboy 
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-theme-kucat"
 # 进阶设置 by sirpdboy 
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-advancedplus luci-i18n-advancedplus-zh-cn -luci-app-argon-config -luci-i18n-argon-config-zh-cn"
-# MosDNS
-#CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-mosdns luci-i18n-mosdns-zh-cn"
 # Turbo ACC 网络加速
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-turboacc"
 # 应用过滤 openappfilter.com
@@ -82,8 +70,6 @@ CUSTOM_PACKAGES="$CUSTOM_PACKAGES acme luci-app-acme luci-i18n-acme-ru"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-lucky lucky"
 # 集客AC
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-gecoosac gecoosac"
-# 任务设置
-#CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-taskplan luci-i18n-taskplan-zh-cn"
 # Easytier
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES easytier luci-app-easytier"
 # 统一文件共享
@@ -93,15 +79,12 @@ CUSTOM_PACKAGES="$CUSTOM_PACKAGES acme luci-app-acme luci-i18n-acme-ru"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-3cat-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-3ginfo-lite-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-acl-zh-cn"
-#CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-adblock-fast-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-adblock-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-advanced-reboot-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-airplay2-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-amule-zh-cn"
-#CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-aria2-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-arpbind-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-attendedsysupgrade-zh-cn"
-#CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-autoreboot-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-banip-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-battstatus-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-bcp38-zh-cn"
@@ -127,7 +110,6 @@ CUSTOM_PACKAGES="$CUSTOM_PACKAGES acme luci-app-acme luci-i18n-acme-ru"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-eoip-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-eqos-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-example-zh-cn"
-#CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-filebrowser-go-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-filebrowser-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-filemanager-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-frpc-zh-cn"
@@ -175,23 +157,18 @@ CUSTOM_PACKAGES="$CUSTOM_PACKAGES acme luci-app-acme luci-i18n-acme-ru"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-pppoe-server-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-privoxy-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-ps3netsrv-zh-cn"
-#CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-qbittorrent-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-qos-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-radicale-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-ramfree-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-rclone-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-rp-pppoe-server-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-rustdesk-server-zh-cn"
-#CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-samba4-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-ser2net-zh-cn"
-#CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-smartdns-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-sms-tool-js-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-snmpd-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-splash-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-spotifyd-zh-cn"
-#CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-sqm-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-squid-zh-cn"
-#CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-statistics-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-syncthing-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-sysuh3c-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-timewol-zh-cn"
@@ -206,7 +183,6 @@ CUSTOM_PACKAGES="$CUSTOM_PACKAGES acme luci-app-acme luci-i18n-acme-ru"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-vlmcsd-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-vnstat2-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-vsftpd-zh-cn"
-#CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-watchcat-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-wechatpush-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-wifischedule-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-wol-zh-cn"
