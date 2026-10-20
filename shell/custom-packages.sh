@@ -10,40 +10,36 @@
 # ================= ВАШИ ВЫБРАННЫЕ ПАКЕТЫ (АКТИВНЫ) ===================
 # =====================================================================
 
-# --- Базовые утилиты и русификация интерфейса ---
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-base-ru luci-i18n-firewall-ru luci-i18n-opkg-ru"
-# Управление дисками, Веб-терминал, WireGuard
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-diskman luci-i18n-diskman-ru luci-app-ttyd luci-i18n-ttyd-ru luci-proto-wireguard luci-i18n-wireguard-ru"
+# --- Базовые утилиты и русификация ---
+CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-base-ru luci-i18n-firewall-ru"
+CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-diskman luci-app-ttyd luci-i18n-ttyd-ru luci-proto-wireguard"
 
 # --- Управление трафиком и сетью ---
-# SQM (Стабильный пинг), Watchcat (Сторожевой таймер), Автоперезагрузка, Мониторинг трафика
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-sqm luci-i18n-sqm-ru luci-app-watchcat luci-i18n-watchcat-ru luci-app-autoreboot luci-i18n-autoreboot-ru luci-app-statistics luci-i18n-statistics-ru"
+CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-sqm luci-i18n-sqm-ru luci-app-watchcat luci-i18n-watchcat-ru luci-app-statistics luci-i18n-statistics-ru"
 
 # --- Блокировка рекламы и DNS ---
-# AdGuard Home, MosDNS, Unbound, SmartDNS, Adblock-Fast
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-adguardhome luci-app-mosdns luci-i18n-mosdns-zh-cn luci-app-unbound luci-i18n-unbound-ru luci-app-smartdns luci-i18n-smartdns-ru luci-app-adblock-fast luci-i18n-adblock-fast-ru"
+CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-adguardhome luci-app-unbound luci-app-smartdns luci-i18n-smartdns-ru luci-app-adblock-fast luci-i18n-adblock-fast-ru"
 
-# --- ПРОКСИ-КЛИЕНТЫ (Выбирайте потом один) ---
-# 1. OpenClash (Классика)
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-openclash luci-compat kmod-tun kmod-inet-diag kmod-nft-tproxy bash curl ip-full unzip luci-i18n-openclash-ru"
-# 2. V2RayA (Панель для Xray)
+# --- ПРОКСИ-КЛИЕНТЫ (оставлены только стабильные) ---
+# 1. OpenClash (без русского перевода)
+CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-openclash luci-compat kmod-tun kmod-inet-diag kmod-nft-tproxy bash curl ip-full unzip"
+# 2. V2RayA (с русским переводом)
 CUSTOM_PACKAGES="$CUSTOM_PACKAGES v2raya luci-app-v2raya luci-i18n-v2raya-ru"
-# 3. PassWall2 (Мощный комбайн)
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES geoview xray-core sing-box hysteria kmod-nft-socket kmod-nft-tproxy luci-app-passwall2 luci-i18n-passwall2-zh-cn"
-# 4. Nikki (Современный клиент на базе sing-box)
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-nikki-zh-cn"
-# 5. GoST (Универсальный прокси)
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES gost luci-app-gost luci-i18n-gost-ru"
-# 6. MicroSocks (Легкий SOCKS5)
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES microsocks luci-app-microsocks luci-i18n-microsocks-ru"
+# 3. PassWall2
+CUSTOM_PACKAGES="$CUSTOM_PACKAGES geoview xray-core sing-box hysteria kmod-nft-socket kmod-nft-tproxy luci-app-passwall2"
+# 4. GoST (без русского перевода)
+CUSTOM_PACKAGES="$CUSTOM_PACKAGES gost luci-app-gost"
 
 # --- VPN И ТУННЕЛИ ---
-# ZeroTier, Tailscale, SoftEther, IPsec, Cloudflared (Cloudflare Tunnel), SSHTunnel
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES zerotier luci-app-zerotier luci-i18n-zerotier-ru luci-app-tailscale-community luci-i18n-tailscale-community-zh-cn softethervpn5-server softethervpn5-libs luci-app-softethervpn luci-i18n-softethervpn-ru strongswan-full luci-app-ipsec-vpnd luci-i18n-ipsec-vpnd-ru cloudflared luci-app-cloudflared luci-i18n-cloudflared-ru sshtunnel luci-app-sshtunnel luci-i18n-sshtunnel-ru"
+CUSTOM_PACKAGES="$CUSTOM_PACKAGES zerotier luci-app-zerotier"
+CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-tailscale-community"
+CUSTOM_PACKAGES="$CUSTOM_PACKAGES softethervpn5-server softethervpn5-libs luci-app-softethervpn"
+CUSTOM_PACKAGES="$CUSTOM_PACKAGES cloudflared luci-app-cloudflared"
+CUSTOM_PACKAGES="$CUSTOM_PACKAGES sshtunnel luci-app-sshtunnel"
 
 # --- Сетевые сервисы и загрузки ---
-# qBittorrent, Aria2 (Торренты/Загрузки), Samba4 (Сетевые папки), ACME (SSL сертификаты), UA2F
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-qbittorrent luci-i18n-qbittorrent-ru luci-app-aria2 luci-i18n-aria2-ru luci-app-samba4 luci-i18n-samba4-ru acme luci-app-acme luci-i18n-acme-ru ua2f luci-app-ua2f luci-i18n-ua2f-ru"
+CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-qbittorrent luci-app-aria2 luci-app-samba4 acme luci-app-acme"
+CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-filebrowser-go luci-app-dockerman"
 
 # --- Файловые менеджеры и Docker (для тестов) ---
 # FileBrowser и Docker (пригодится для запуска чего угодно)
