@@ -7,68 +7,57 @@
 # 考虑到istore商店的集成与否 属于高频操作 故 目前已将集成store的操作放置在 工作流的UI 选项 用户自行勾选 则集成  不勾选则不集成 以减少修改此文件的次数
 
 # =====================================================================
-# ================= ВАШИ ВЫБРАННЫЕ ПАКЕТЫ (АКТИВНЫ) ===================
+# ================= ВАШИ ВЫБРАННЫЕ ПАКЕТЫ (ИСПРАВЛЕНО) ================
 # =====================================================================
 
-# --- Базовые утилиты и русификация ---
+# --- Базовые утилиты и русификация интерфейса ---
 CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-i18n-base-ru luci-i18n-firewall-ru"
+# Управление дисками, Веб-терминал, WireGuard (без русификации, т.к. нет перевода)
 CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-diskman luci-app-ttyd luci-i18n-ttyd-ru luci-proto-wireguard"
 
 # --- Управление трафиком и сетью ---
 CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-sqm luci-i18n-sqm-ru luci-app-watchcat luci-i18n-watchcat-ru luci-app-statistics luci-i18n-statistics-ru"
 
 # --- Блокировка рекламы и DNS ---
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-adguardhome luci-app-unbound luci-app-smartdns luci-i18n-smartdns-ru luci-app-adblock-fast luci-i18n-adblock-fast-ru"
+# Убраны mosdns (нет v2dat) и nikki (нет ядра nikki)
+CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-adguardhome luci-app-unbound luci-i18n-unbound-ru luci-app-smartdns luci-i18n-smartdns-ru luci-app-adblock-fast luci-i18n-adblock-fast-ru"
 
-# --- ПРОКСИ-КЛИЕНТЫ (оставлены только стабильные) ---
-# 1. OpenClash (без русского перевода)
+# --- ПРОКСИ-КЛИЕНТЫ ---
+# 1. OpenClash (без русификации)
 CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-openclash luci-compat kmod-tun kmod-inet-diag kmod-nft-tproxy bash curl ip-full unzip"
-# 2. V2RayA (с русским переводом)
+# 2. V2RayA (с русским)
 CUSTOM_PACKAGES="$CUSTOM_PACKAGES v2raya luci-app-v2raya luci-i18n-v2raya-ru"
 # 3. PassWall2
 CUSTOM_PACKAGES="$CUSTOM_PACKAGES geoview xray-core sing-box hysteria kmod-nft-socket kmod-nft-tproxy luci-app-passwall2"
-# 4. GoST (без русского перевода)
+# 4. GoST (без русификации)
 CUSTOM_PACKAGES="$CUSTOM_PACKAGES gost luci-app-gost"
+# 5. MicroSocks (без русификации)
+CUSTOM_PACKAGES="$CUSTOM_PACKAGES microsocks luci-app-microsocks"
 
 # --- VPN И ТУННЕЛИ ---
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES zerotier luci-app-zerotier"
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-tailscale-community"
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES softethervpn5-server softethervpn5-libs luci-app-softethervpn"
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES cloudflared luci-app-cloudflared"
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES sshtunnel luci-app-sshtunnel"
+# ZeroTier, Tailscale, SoftEther, IPsec (без strongswan-full), Cloudflared, SSHTunnel
+CUSTOM_PACKAGES="$CUSTOM_PACKAGES zerotier luci-app-zerotier luci-app-tailscale-community luci-i18n-tailscale-community-zh-cn softethervpn5-server softethervpn5-libs luci-app-softethervpn luci-app-ipsec-vpnd cloudflared luci-app-cloudflared luci-i18n-cloudflared-ru sshtunnel luci-app-sshtunnel luci-i18n-sshtunnel-ru"
 
 # --- Сетевые сервисы и загрузки ---
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-qbittorrent luci-app-aria2 luci-app-samba4 acme luci-app-acme"
-CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-filebrowser-go luci-app-dockerman"
+# qBittorrent, Aria2, Samba4, ACME, UA2F (без русификации)
+CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-qbittorrent luci-app-aria2 luci-i18n-aria2-ru luci-app-samba4 luci-i18n-samba4-ru acme luci-app-acme luci-i18n-acme-ru ua2f luci-app-ua2f"
 
-# --- Файловые менеджеры и Docker (для тестов) ---
-# FileBrowser и Docker (пригодится для запуска чего угодно)
+# --- Файловые менеджеры и Docker ---
 CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-filebrowser-go luci-i18n-filebrowser-go-zh-cn luci-app-dockerman luci-i18n-dockerman-ru"
 
 # =====================================================================
 # ======================= ОСТАЛЬНОЙ СПИСОК ============================
 # =====================================================================
-# (Тут оставлен оригинальный список для справки, ничего не трогаем)
-
-# VPN
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-tailscale-community luci-i18n-tailscale-community-zh-cn"
-# 分区扩容 by sirpdboy 
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-partexp luci-i18n-partexp-zh-cn"
-# 酷猫主题 by sirpdboy 
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-theme-kucat"
-# 进阶设置 by sirpdboy 
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-advancedplus luci-i18n-advancedplus-zh-cn -luci-app-argon-config -luci-i18n-argon-config-zh-cn"
-# Turbo ACC 网络加速
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-turboacc"
-# 应用过滤 openappfilter.com
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-appfilter luci-i18n-appfilter-zh-cn"
-# Lucky大吉 
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-lucky lucky"
-# 集客AC
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-gecoosac gecoosac"
-# Easytier
+#CUSTOM_PACKAGES="$CUSTOM_PACKAGES luci-app-taskplan luci-i18n-taskplan-zh-cn"
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES easytier luci-app-easytier"
-# 统一文件共享
 #CUSTOM_PACKAGES="$CUSTOM_PACKAGES webdav2 luci-app-unishare"
 
 #===========================以下imm仓库内的软件==============================↓
